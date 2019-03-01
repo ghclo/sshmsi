@@ -24,5 +24,20 @@ COPY ./ /app/
 # Copy web UI
 #COPY --from=web_deps /web/dist/ /app/publicweb
 
-EXPOSE 3000
-CMD ["npm", "start"]
+# Install ssh service
+RUN apk update --no-cache \
+     && apk add openssh \
+     && apk add openrc \
+     && apk add bash
+
+COPY sshd_config /etc/ssh/
+COPY ssh_setup.sh /tmp
+RUN chmod -R +x /tmp/ssh_setup.sh \
+   && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) 
+
+COPY init_container.sh /app/
+RUN chmod +x /app/init_container.sh
+EXPOSE 2222 3000 
+
+#CMD ["npm", "start"] 
+ENTRYPOINT ["/app/init_container.sh"]
