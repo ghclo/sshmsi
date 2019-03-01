@@ -1,7 +1,7 @@
 const express = require('express');
 const msRestAzure = require('ms-rest-azure');
 const KeyVault = require('azure-keyvault');
-const KEY_VAULT_URI = "https://lpmsiauth.vault.azure.net" || process.env['KEY_VAULT_URI'];  //https://lpmsiauth.vault.azure.net/
+const KEY_VAULT_URI =  process.env['KEY_VAULT_URI'] || "https://clovkeyvault.vault.azure.net";  //https://lpmsiauth.vault.azure.net/
 
 let app = express();
 //let clientId = process.env['CLIENT_ID']; // service principal    8a406187-68aa-489a-83b6-3eb6fd83be22
@@ -50,4 +50,6 @@ let port = process.env.PORT || 9000;
 
 app.listen(port, function () {
   console.log(`Server running at http://localhost:${port}`);
+  console.log ("process.env['KEY_VAULT_URI'] "+process.env['KEY_VAULT_URI']);
+  console.log("KEY_VAULT_URI "+KEY_VAULT_URI);
 });

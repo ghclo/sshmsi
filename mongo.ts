@@ -9,7 +9,7 @@ import * as msRestAzure from 'ms-rest-azure';
 import * as keyVault from 'azure-keyvault';
 //import * as request from 'request';
 
-const KEY_VAULT_URI =  process.env['AzureKeyVault'] || 'https://lpmsiauth.vault.azure.net/';
+const KEY_VAULT_URI =  process.env['AzureKeyVault'] || 'https://clovkeyvault.vault.azure.net';
 
 export default class MongoDB extends Service {
   //@inject private logger: Logger;
