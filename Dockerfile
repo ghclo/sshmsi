@@ -26,9 +26,10 @@ COPY ./ /app/
 
 # Install ssh service
 RUN apk update --no-cache \
+     && echo "root:Docker!" | chpasswd \
      && apk add openssh \
      && apk add openrc \
-     && apk add bash
+     && apk add bash 
 
 COPY sshd_config /etc/ssh/
 COPY ssh_setup.sh /tmp
